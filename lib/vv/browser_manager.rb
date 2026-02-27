@@ -5,6 +5,7 @@ require_relative "browser_manager/model_discovery"
 require_relative "browser_manager/precharge_client"
 require_relative "browser_manager/llm_client"
 require_relative "browser_manager/llm_server"
+require_relative "browser_manager/benchmark"
 require_relative "browser_manager/engine"
 
 module Vv

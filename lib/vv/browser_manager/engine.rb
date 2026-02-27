@@ -3,6 +3,13 @@ module Vv
     class Engine < ::Rails::Engine
       isolate_namespace Vv::BrowserManager
 
+      # Auto-include migrations from the engine
+      initializer "vv_browser_manager.migrations" do |app|
+        config.paths["db/migrate"].expanded.each do |expanded_path|
+          app.config.paths["db/migrate"] << expanded_path
+        end
+      end
+
       initializer "vv_browser_manager.routes" do |app|
         app.routes.append do
           mount Vv::BrowserManager::Engine => "/vv"
