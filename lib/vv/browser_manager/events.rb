@@ -15,7 +15,14 @@ module Vv
       # Published when browser reports its available models
       ModelsDiscovered = Class.new(RailsEventStore::Event)
 
-      ALL = [LlmRequested, LlmCompleted, ModelDiscoveryRequested, ModelsDiscovered].freeze
+      # Published by PrechargeClient — request to warm up a model
+      PrechargeRequested = Class.new(RailsEventStore::Event)
+
+      # Published when browser completes precharge (model warm)
+      PrechargeCompleted = Class.new(RailsEventStore::Event)
+
+      ALL = [LlmRequested, LlmCompleted, ModelDiscoveryRequested, ModelsDiscovered,
+             PrechargeRequested, PrechargeCompleted].freeze
     end
   end
 end
