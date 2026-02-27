@@ -17,6 +17,8 @@ Gem::Specification.new do |spec|
     "vv-browser-manager.gemspec",
   ]
 
-  spec.add_dependency "railties", ">= 7.0", "< 9"
-  spec.add_dependency "vv-rails", ">= 0.9.0", "< 2"
+  spec.add_dependency "railties",          ">= 7.0", "< 9"
+  spec.add_dependency "actioncable",       ">= 7.0", "< 9"
+  spec.add_dependency "rails_event_store", ">= 2.0", "< 3"
+  spec.add_dependency "vv-rails",          ">= 0.9.0", "< 2"
 end

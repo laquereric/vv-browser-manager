@@ -8,6 +8,15 @@ module Vv
           mount Vv::BrowserManager::Engine => "/vv"
         end
       end
+
+      # Subscribe LlmServer to RES events after event_store is configured
+      initializer "vv_browser_manager.llm_server", after: :load_config_initializers do
+        ActiveSupport.on_load(:after_initialize) do
+          if defined?(::Rails.configuration.event_store) && ::Rails.configuration.event_store
+            Vv::BrowserManager::LlmServer.subscribe(::Rails.configuration.event_store)
+          end
+        end
+      end
     end
   end
 end
