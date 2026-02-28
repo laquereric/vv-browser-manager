@@ -16,6 +16,11 @@ module Vv
         end
       end
 
+      # Append Llama Stack API routes (/v1/*, /v1alpha/*, /v1beta/*)
+      initializer "vv_browser_manager.llama_stack_routes" do |app|
+        Vv::BrowserManager::LlamaStack::Routes.draw(app)
+      end
+
       # Subscribe LlmServer to RES events after event_store is configured
       initializer "vv_browser_manager.llm_server", after: :load_config_initializers do
         ActiveSupport.on_load(:after_initialize) do
