@@ -15,6 +15,8 @@ Gem::Specification.new do |spec|
     "app/**/*",
     "db/**/*",
     "config/**/*",
+    "../library/lib/**/*",
+    "../VERSION",
     "vv-browser-manager.gemspec",
   ]
 
