@@ -195,13 +195,23 @@ module Vv
       end
 
       # Strip ```json ... ``` fences that LLMs commonly wrap responses in.
+      # Handles: ```json\n{...}\n```, ```\n{...}\n``` with trailing text,
+      # and nested/multiple fences.
       def self.strip_markdown_fences(text)
         stripped = text.strip
         if stripped.start_with?("```")
           # Remove opening fence (```json, ```JSON, ```, etc.)
           stripped = stripped.sub(/\A```\w*\s*\n?/, "")
-          # Remove closing fence
-          stripped = stripped.sub(/\n?```\s*\z/, "")
+          # Remove closing fence and anything after it
+          stripped = stripped.sub(/\n?```.*\z/m, "")
+        end
+        # Fallback: extract first JSON object if still not parseable
+        begin
+          JSON.parse(stripped)
+        rescue JSON::ParserError
+          if (m = text.match(/\{[\s\S]*\}/))
+            stripped = m[0]
+          end
         end
         stripped.strip
       end
