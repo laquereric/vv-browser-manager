@@ -1,5 +1,5 @@
 module Vv
   module BrowserManager
-    VERSION = "0.9.8"
+    VERSION = "0.10.4"
   end
 end
